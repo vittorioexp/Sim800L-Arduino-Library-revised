@@ -1,10 +1,7 @@
 ## Library SIM800l Module for Arduino UNO
 The Purpose of This library is to use the module in the most easy way and transparent.  
-Website: [Sim800l library](https://cristiansteib.github.io/Sim800l/)
+Website: [Sim800l library](https://github.com/VittorioEsposito/Sim800l-revised)
 
-##To download and Install.
-Go to [Releases](https://github.com/cristiansteib/Sim800l/releases) click the " Source Code (zip) " button, then rename the uncompressed folder to **Sim800l**. 
-  Check that the *Sim800l* folder contains Sim800l.cpp and Sim800l.h
 
 Go to arduino IDE Sketch >> Import Library >> add library... Select the folder Sim800l
 
@@ -31,6 +28,10 @@ Name|Return|Notes
 begin()|None|Initialize the library
 begin(number)|None|Initialize the library
 reset()|None|Reset the module,and wait to Sms Ready.
+setSleepMode(bool)|true or false|enable or disable sleep mode
+getSleepMode()|true or false|return sleep mode
+setFunctionalityMode(number)|true or false|set functionality mode
+getFunctionalityMode()|true or false|return functionality mode
 sendSms(number,text)|true or false|parameters must be Strings.
 readSms(index)|String|index is the position of the sms in the prefered memory storage
 getNumberSms(index)|String|returns the number of the sms.

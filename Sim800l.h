@@ -85,26 +85,33 @@ class Sim800l
 	uint32_t _baud;
 	int _timeout;
 	String _buffer;
+  	bool _sleepMode;
+	uint8_t _functionalityMode;
 	
 	String _readSerial();
   	
   	
   public:
-
+  
  	void begin();				//Default baud 9600
 	void begin(uint32_t baud);
  	void reset(); 
-
- 	// Methods for calling || Funciones de llamadas. 
+	
+	bool setSleepMode(bool state);
+	bool getSleepMode();
+	bool setFunctionalityMode(uint8_t fun);
+	uint8_t getFunctionalityMode();	
+	
+ 	// Methods for callinG
  	bool answerCall(); 	
  	void callNumber(char* number);
  	bool hangoffCall();
  	uint8_t getCallStatus();   
- 	//Methods for sms || Funciones de SMS.
+ 	//Methods for sms
 	bool sendSms(char* number,char* text);	 
-	String readSms(uint8_t index); //return all the content of sms
-	String getNumberSms(uint8_t index); //return the number of the sms..   
-	bool delAllSms();     // return :  OK or ERROR .. 
+	String readSms(uint8_t index); 			//return all the content of sms
+	String getNumberSms(uint8_t index); 	//return the number of the sms..   
+	bool delAllSms();     					// return :  OK or ERROR .. 
 
 	void signalQuality();
 	void setPhoneFunctionality();
@@ -114,6 +121,7 @@ class Sim800l
 	void RTCtime(int *day,int *month, int *year,int *hour,int *minute, int *second);  
 	String dateNet(); //return date,time, of the network
 	bool updateRtc(int utc);  //Update the RTC Clock with de Time AND Date of red-.
+	
 };
 
 #endif 

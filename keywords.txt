@@ -33,11 +33,15 @@ getNumberSms KEYWORD2
 
 # Methods for Module (KEYWORD2)
 #######################################
-begin KEYWORD2 
-reset KEYWORD2
+begin	KEYWORD2 
+reset	KEYWORD2
 activateBearerProfile	KEYWORD2
-deactivateBearerProfile KEYWORD2
-RTCtime KEYWORD2
-dateNet KEYWORD2
-updateRtc KEYWORD2
-setPhoneFunctionality KEYWORD2
+deactivateBearerProfile	KEYWORD2
+RTCtime	KEYWORD2
+dateNet	KEYWORD2
+updateRtc	KEYWORD2
+setPhoneFunctionality	KEYWORD2
+setSleepMode	KEYWORD2
+getSleepMode	KEYWORD2
+setFunctionalityMode	KEYWORD2
+getFunctionalityMode	KEYWORD2

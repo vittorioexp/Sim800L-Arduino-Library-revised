@@ -76,6 +76,9 @@ void Sim800l::begin(){
 	_baud = DEFAULT_BAUD_RATE;			// Default baud rate 9600
 	SIM.begin(_baud);
 	
+	_sleepMode = 0;
+	_functionalityMode = 1;
+	
 	#if (LED_FLAG) 
 		pinMode(LED_PIN, OUTPUT);
 	#endif
@@ -98,6 +101,57 @@ void Sim800l::begin(uint32_t baud) {
 	
 	_buffer.reserve(BUFFER_RESERVE_MEMORY); // Reserve memory to prevent intern fragmention
 }
+
+
+/*
+ * AT+CSCLK=0	Disable slow clock, module will not enter sleep mode.
+ * AT+CSCLK=1	Enable slow clock, it is controlled by DTR. When DTR is high, module can enter sleep mode. When DTR changes to low level, module can quit sleep mode
+ */
+  bool Sim800l::setSleepMode(bool state) {
+	  
+	  _sleepMode = state;
+	  
+	  if (_sleepMode) SIM.print(F("AT+CSCLK=1\r\n "));
+	  else 			  SIM.print(F("AT+CSCLK=0\r\n "));
+	  
+	  if ( (_readSerial().indexOf("ER"))!=-1) {return false;}else return true;
+  }
+
+  bool Sim800l::getSleepMode() {
+	  return _sleepMode;
+  }
+  
+/*
+ * AT+CFUN=0	Minimum functionality
+ * AT+CFUN=1	Full functionality (defualt)
+ * AT+CFUN=4	Flight mode (disable RF function)
+*/ 
+  bool Sim800l::setFunctionalityMode(uint8_t fun) {
+	  
+	  if (fun!=0 || fun!=1 || fun!=4) return true;
+	  
+	  _functionalityMode = fun;
+	  
+	  switch(_functionalityMode) {
+		  case 0:
+			SIM.print(F("AT+CFUN=0\r\n "));
+		  break;
+		  case 1:
+			SIM.print(F("AT+CFUN=1\r\n "));
+		  break;
+		  case 4:
+			SIM.print(F("AT+CFUN=4\r\n "));
+		  break;
+	  }
+	  
+	  if ( (_readSerial().indexOf("ER"))!=-1) {return false;}else return true;
+	  
+  }
+  
+  uint8_t Sim800l::getFunctionalityMode() {
+	return _functionalityMode;
+  }
+  
 
 
 //
