@@ -72,7 +72,7 @@ void setup(){
 
 
   // Minimum functionality
-  if (Sim800l.setFunctionalityMode(0)) Serial.println("ERROR");
+  if (!Sim800l.setFunctionalityMode(0)) Serial.println("ERROR");
   else Serial.println("Minimum functionality");
 
   Serial.print("Functionality mode: ");
@@ -83,7 +83,7 @@ void setup(){
 
 
   // full functionality
-  if (Sim800l.setFunctionalityMode(1)) Serial.println("ERROR");
+  if (!Sim800l.setFunctionalityMode(1)) Serial.println("ERROR");
   else Serial.println("Full functionality");
 
   Serial.print("Functionality mode: ");
@@ -94,7 +94,7 @@ void setup(){
 
 
   // Flight mode (disable RF function)
-  if (Sim800l.setFunctionalityMode(4)) Serial.println("ERROR");
+  if (!Sim800l.setFunctionalityMode(4)) Serial.println("ERROR");
   else Serial.println("Flight mode (disable RF function)");
 
   Serial.print("Functionality mode: ");
@@ -107,4 +107,3 @@ void setup(){
 void loop() {
   
 }
-

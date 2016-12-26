@@ -75,7 +75,7 @@
 
 #define BUFFER_RESERVE_MEMORY	255
 #define DEFAULT_BAUD_RATE		9600
-#define TIME_OUT_READ_SERIAL	60000
+#define TIME_OUT_READ_SERIAL	10000
 
 
 class Sim800l
@@ -108,26 +108,25 @@ public:
     String getOperatorsList();
     String getOperator();
 
-    // Methods for callinG
     bool answerCall();
     void callNumber(char* number);
     bool hangoffCall();
     uint8_t getCallStatus();
-    //Methods for sms
+
     bool sendSms(char* number,char* text);
-    String readSms(uint8_t index); 			//return all the content of sms
-    String getNumberSms(uint8_t index); 	//return the number of the sms..
-    bool delAllSms();     					// return :  OK or ERROR ..
+    String readSms(uint8_t index); 			
+    String getNumberSms(uint8_t index); 	
+    bool delAllSms();     					
 
 
-    void signalQuality();
+    String signalQuality();
     void setPhoneFunctionality();
     void activateBearerProfile();
     void deactivateBearerProfile();
-    //get time with the variables by reference
+    
     void RTCtime(int *day,int *month, int *year,int *hour,int *minute, int *second);
-    String dateNet(); //return date,time, of the network
-    bool updateRtc(int utc);  //Update the RTC Clock with de Time AND Date of red-.
+    String dateNet();
+    bool updateRtc(int utc); 
 
 };
 

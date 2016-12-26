@@ -40,6 +40,7 @@ sendSms(number,text)|true or false|parameters must be Strings.
 readSms(index)|String|index is the position of the sms in the prefered memory storage
 getNumberSms(index)|String|returns the number of the sms.
 delAllSms()|true or false|Delete all sms
+signalQuality()|String|return info about signal quality
 answerCall()|true or false|
 callNumber(number)|None|
 hangoffCall()|true or false|

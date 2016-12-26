@@ -70,8 +70,6 @@ SoftwareSerial SIM(RX_PIN,TX_PIN);
 void Sim800l::begin()
 {
 
-    pinMode(RX_PIN, INPUT);
-    pinMode(TX_PIN, OUTPUT);
     pinMode(RESET_PIN, OUTPUT);
 
     _baud = DEFAULT_BAUD_RATE;			// Default baud rate 9600
@@ -90,8 +88,6 @@ void Sim800l::begin()
 void Sim800l::begin(uint32_t baud)
 {
 
-    pinMode(RX_PIN, INPUT);
-    pinMode(TX_PIN, OUTPUT);
     pinMode(RESET_PIN, OUTPUT);
 
     _baud = baud;
@@ -139,7 +135,7 @@ bool Sim800l::getSleepMode()
 bool Sim800l::setFunctionalityMode(uint8_t fun)
 {
 
-    if (fun!=0 || fun!=1 || fun!=4) return true;
+    if (fun!=0 || fun!=1 || fun!=4) return false;
 
     _functionalityMode = fun;
 
@@ -292,7 +288,7 @@ void Sim800l::setPhoneFunctionality()
 }
 
 
-void Sim800l::signalQuality()
+String Sim800l::signalQuality()
 {
     /*Response
     +CSQ: <rssi>,<ber>Parameters
@@ -308,7 +304,7 @@ void Sim800l::signalQuality()
     99 Not known or not detectable
     */
     SIM.print (F("AT+CSQ\r\n"));
-    Serial.println(_readSerial());
+    return(_readSerial());
 }
 
 
@@ -381,8 +377,13 @@ bool Sim800l::hangoffCall()
 {
     SIM.print (F("ATH\r\n"));
     _buffer=_readSerial();
-    if ( (_buffer.indexOf("OK") ) != -1) return false;
+    if ( (_buffer.indexOf("ER")) == -1)
+    {
+        return false;
+    }
     else return true;
+    // Error found, return 1
+    // Error NOT found, return 0
 }
 
 
@@ -404,21 +405,20 @@ bool Sim800l::sendSms(char* number,char* text)
     SIM.print((char)26);
     _buffer=_readSerial();
     //expect CMGS:xxx   , where xxx is a number,for the sending sms.
-    if (((_buffer.indexOf("CMGS") ) != -1 ) )
-    {
-        return true;
-    }
-    else
+    if ( (_buffer.indexOf("ER")) == -1)
     {
         return false;
     }
+    else return true;
+    // Error found, return 1
+    // Error NOT found, return 0
 }
 
 
 String Sim800l::getNumberSms(uint8_t index)
 {
     _buffer=readSms(index);
-    Serial.println(_buffer.length());
+    //Serial.println(_buffer.length());
     if (_buffer.length() > 10) //avoid empty sms
     {
         uint8_t _idx1=_buffer.indexOf("+CMGR:");
@@ -443,7 +443,7 @@ String Sim800l::readSms(uint8_t index)
     {
         SIM.print (F("AT+CMGR="));
         SIM.print (index);
-        SIM.print("\r");
+        SIM.print ("\r");
         _buffer=_readSerial();
         if (_buffer.indexOf("CMGR:")!=-1)
         {
@@ -460,15 +460,13 @@ bool Sim800l::delAllSms()
 {
     SIM.print(F("at+cmgda=\"del all\"\n\r"));
     _buffer=_readSerial();
-    if (_buffer.indexOf("OK")!=-1)
+    if ( (_buffer.indexOf("ER")) == -1)
     {
         return false;
     }
-    else
-    {
-        return true;
-    }
-    // ERROR -> return true
+    else return true;
+    // Error found, return 1
+    // Error NOT found, return 0
 }
 
 

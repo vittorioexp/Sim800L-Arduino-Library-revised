@@ -70,7 +70,7 @@ void setup(){
   Sim800l.begin();    // initializate the library. 
 
   // Sleep
-  if (Sim800l.setSleepMode(true)) Serial.println("ERROR");
+  if (!Sim800l.setSleepMode(true)) Serial.println("ERROR");
 
   if (Sim800l.setSleepMode(false)) Serial.println("Sleep mode is enabled");
   else Serial.println("Sleep mode is NOT enabled");
@@ -78,7 +78,7 @@ void setup(){
   delay(5000);
 
   //Wake up
-  if (Sim800l.setSleepMode(false)) Serial.println("ERROR");
+  if (!Sim800l.setSleepMode(false)) Serial.println("ERROR");
 
   if (Sim800l.getSleepMode()) Serial.println("Sleep mode is enabled");
   else Serial.println("Sleep mode is NOT enabled");
