@@ -1,35 +1,31 @@
 /*
-*  This library was written by  Cristian Steib.
- *      steibkhriz@gmail.com
+ *  This library was written by Vittorio Esposito
+ *    https://github.com/VittorioEsposito
  *
- * Revised by:
- * 		Vittorio Esposito	-	https://github.com/VittorioEsposito
- *
- *
- *  Designed to work with the GSM Sim800l.
+ *  Designed to work with the GSM Sim800L.
  *
  *  ENG
- *     	This library uses SoftwareSerial, you can define RX and TX pins
- *     	in the header "Sim800l.h", by default pins are RX=10 and TX=11.
- *     	Be sure that GND is connected to arduino too.
- *     	You can also change the RESET_PIN as you prefer.
+ *  	This library uses SoftwareSerial, you can define RX and TX pins
+ *  	in the header "Sim800L.h", by default pins are RX=10 and TX=11.
+ *  	Be sure that GND is connected to arduino too.
+ *  	You can also change the RESET_PIN as you prefer.
  *
  *	ESP
- *     	Esta libreria usa SoftwareSerial, se pueden cambiar los pines de RX y TX
- *     	en el archivo header, "Sim800l.h", por defecto los pines vienen configurado en
- *     	RX=10 TX=11.
- *     	Tambien se puede cambiar el RESET_PIN por otro que prefiera
+ *  	Esta libreria usa SoftwareSerial, se pueden cambiar los pines de RX y TX
+ *  	en el archivo header, "Sim800L.h", por defecto los pines vienen configurado en
+ *  	RX=10 TX=11.
+ *  	Tambien se puede cambiar el RESET_PIN por otro que prefiera
  *
  *	ITA
  *		Questa libreria utilizza la SoftwareSerial, si possono cambiare i pin di RX e TX
- *      dall' intestazione "Sim800l.h", di default essi sono impostati come RX=10 RX=11
+ *  	dall' intestazione "Sim800L.h", di default essi sono impostati come RX=10 RX=11
  *		Assicurarsi di aver collegato il dispositivo al pin GND di Arduino.
  *		E' anche possibile cambiare il RESET_PIN.
  *
  *
- *    PINOUT:
+ *   DEFAULT PINOUT:
  *        _____________________________
- *       |  ARDUINO UNO >>>   SIM800L  |
+ *       |  ARDUINO UNO >>>   Sim800L  |
  *        -----------------------------
  *            GND      >>>   GND
  *        RX  10       >>>   TX
@@ -53,32 +49,33 @@
  *		Supported baud rates are 300, 600, 1200, 2400, 4800, 9600, 14400, 19200, 28800, 31250, 38400, 57600, and 115200.
  *
  *
- *	Created on:  April 20, 2016
- *  	Author:  Cristian Steib
- *		Reviser: Vittorio Esposito
+ *	Edited on:  December 24, 2016
+ *    Editor:   Vittorio Esposito
+ *
+ *  Original version by:   Cristian Steib
  *
  *
 */
 
-#ifndef Sim800l_h
-#define Sim800l_h
+#ifndef Sim800L_h
+#define Sim800L_h
 #include <SoftwareSerial.h>
 #include "Arduino.h"
 
 
-#define RX_PIN 		10
-#define TX_PIN 		11
-#define RESET_PIN 	2		// pin to the reset pin sim800l
+#define DEFAULT_RX_PIN 		10
+#define DEFAULT_TX_PIN 		11
+#define DEFAULT_RESET_PIN 	2		// pin to the reset pin Sim800L
 
-#define LED_FLAG	true 	// true: use led.	 false: don't user led.
-#define LED_PIN 	13 		// pin to indicate states.
+#define DEFAULT_LED_FLAG	true 	// true: use led.	 false: don't user led.
+#define DEFAULT_LED_PIN 	13 		// pin to indicate states.
 
 #define BUFFER_RESERVE_MEMORY	255
 #define DEFAULT_BAUD_RATE		9600
-#define TIME_OUT_READ_SERIAL	10000
+#define TIME_OUT_READ_SERIAL	5000
 
 
-class Sim800l
+class Sim800L : public SoftwareSerial
 {
 private:
 
@@ -89,11 +86,23 @@ private:
     uint8_t _functionalityMode;
 
     String _readSerial();
+    String _readSerial(uint32_t timeout);
 
 
 public:
 
-    void begin();				//Default baud 9600
+    uint8_t	RX_PIN;
+    uint8_t TX_PIN;
+    uint8_t RESET_PIN;
+    uint8_t LED_PIN;
+    bool	LED_FLAG;
+
+    Sim800L(void);
+    Sim800L(uint8_t rx, uint8_t tx);
+    Sim800L(uint8_t rx, uint8_t tx, uint8_t rst);
+    Sim800L(uint8_t rx, uint8_t tx, uint8_t rst, uint8_t led);
+
+    void begin();					//Default baud 9600
     void begin(uint32_t baud);
     void reset();
 
@@ -114,19 +123,19 @@ public:
     uint8_t getCallStatus();
 
     bool sendSms(char* number,char* text);
-    String readSms(uint8_t index); 			
-    String getNumberSms(uint8_t index); 	
-    bool delAllSms();     					
+    String readSms(uint8_t index);
+    String getNumberSms(uint8_t index);
+    bool delAllSms();
 
 
     String signalQuality();
     void setPhoneFunctionality();
     void activateBearerProfile();
     void deactivateBearerProfile();
-    
+
     void RTCtime(int *day,int *month, int *year,int *hour,int *minute, int *second);
     String dateNet();
-    bool updateRtc(int utc); 
+    bool updateRtc(int utc);
 
 };
 
