@@ -45,3 +45,8 @@ setSleepMode	KEYWORD2
 getSleepMode	KEYWORD2
 setFunctionalityMode	KEYWORD2
 getFunctionalityMode	KEYWORD2
+
+setPIN	KEYWORD2
+getProductInfo	KEYWORD2
+getOperatorsList	KEYWORD2
+getOperator	KEYWORD2

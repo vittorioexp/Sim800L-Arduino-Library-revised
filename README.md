@@ -1,9 +1,9 @@
 ## Library SIM800l Module for Arduino UNO
 The Purpose of This library is to use the module in the most easy way and transparent.  
-Website: [Sim800l library](https://github.com/VittorioEsposito/Sim800l-revised)
+Website: [Sim800L library](https://github.com/VittorioEsposito/Sim800l-revised)
 
 
-Go to arduino IDE Sketch >> Import Library >> add library... Select the folder Sim800l
+Go to arduino IDE Sketch >> Import Library >> add library... Select the folder Sim800l-revised
 
 OR 
 
@@ -32,6 +32,10 @@ setSleepMode(bool)|true or false|enable or disable sleep mode
 getSleepMode()|true or false|return sleep mode
 setFunctionalityMode(number)|true or false|set functionality mode
 getFunctionalityMode()|true or false|return functionality mode
+setPIN(String)|true or false|
+getProductInfo()|String|return product identification information
+getOperatorsList()|String|return the list of operators
+getOperator()|String|return the currently selected operator
 sendSms(number,text)|true or false|parameters must be Strings.
 readSms(index)|String|index is the position of the sms in the prefered memory storage
 getNumberSms(index)|String|returns the number of the sms.
@@ -47,14 +51,3 @@ RTCtime(int *day,int *month, int *year,int *hour,int *minute, int *second)|None|
 dateNet()|String|Return date time GSM
 updateRtc(utc)|true or false|Return if the rtc was update with date time GSM. 
 ____________________________________________________________________________________
-
-You can regulate the voltage to the desired with this, is not the best,
-but for start it's easy.
-
-![alt text](https://github.com/cristiansteib/Sim800l/blob/master/images/power_supply.png "LM317")
-
-
-
-For the **reset pin** they need NPN transistor, this is an example circuit that you can use.
-
-![alt text](https://github.com/cristiansteib/Sim800l/blob/master/images/RESET.png "reset_circuit")
