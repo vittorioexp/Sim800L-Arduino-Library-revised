@@ -1,18 +1,20 @@
-## Library SIM800l Module for Arduino UNO
+## Library Sim800L Module for Arduino UNO
 The Purpose of This library is to use the module in the most easy way and transparent.  
-Website: [Sim800L library](https://github.com/VittorioEsposito/Sim800l-revised)
+Website: [Sim800L library](https://github.com/VittorioEsposito/Sim800L-revised)
+
+Original version by:   [Cristian Steib] (https://github.com/cristiansteib)
 
 
-Go to arduino IDE Sketch >> Import Library >> add library... Select the folder Sim800l-revised
+Go to arduino IDE Sketch >> Import Library >> add library... Select the folder Sim800L-revised
 
 OR 
 
-Place the Sim800l library folder your arduinosketchfolder/libraries/ folder. 
+Place the Sim800L library folder your ArduinoSketchFolder/libraries/ folder. 
 You may need to create the libraries subfolder if its your first library. Restart the IDE.
 
 
-## connections & pinouts
-Arduino Uno  |   Sim800l   |    Notes  
+## connections & pinouts (DEFAULT)
+Arduino Uno  |   Sim800L   |    Notes  
 -------------|-------------|------------
 +5v| (3.8v)~(4.4v)!| Power supply input
 10 RX_PIN | TX |  
@@ -26,8 +28,8 @@ GND | GND |
 Name|Return|Notes
 :-------|:-------:|:-----------------------------------------------:|
 begin()|None|Initialize the library
-begin(number)|None|Initialize the library
-reset()|None|Reset the module,and wait to Sms Ready.
+begin(number)|None|Initialize the library with user's baud rate
+reset()|None|Reset the module, and wait to Sms Ready.
 setSleepMode(bool)|true or false|enable or disable sleep mode
 getSleepMode()|true or false|return sleep mode status
 setFunctionalityMode(number)|true or false|set functionality mode
@@ -36,7 +38,7 @@ setPIN(String)|true or false|enable user to set a pin code
 getProductInfo()|String|return product identification information
 getOperatorsList()|String|return the list of operators
 getOperator()|String|return the currently selected operator
-sendSms(number,text)|true or false|parameters must be Strings.
+sendSms(number,text)|true or false|both parameters must be Strings.
 readSms(index)|String|index is the position of the sms in the prefered memory storage
 getNumberSms(index)|String|returns the number of the sms.
 delAllSms()|true or false|Delete all sms

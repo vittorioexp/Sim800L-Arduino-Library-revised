@@ -1,35 +1,31 @@
 /* 
-*  This library was written by  Cristian Steib.
- *      steibkhriz@gmail.com
+ *  This library was written by Vittorio Esposito
+ *    https://github.com/VittorioEsposito
  *
- * Revised by:
- *     Vittorio Esposito - https://github.com/VittorioEsposito
- *    
- *
- *  Designed to work with the GSM Sim800l.
+ *  Designed to work with the GSM Sim800L.
  *
  *  ENG
- *      This library uses SoftwareSerial, you can define RX and TX pins
- *      in the header "Sim800l.h", by default pins are RX=10 and TX=11.
- *      Be sure that GND is connected to arduino too. 
- *      You can also change the RESET_PIN as you prefer.
+ *    This library uses SoftwareSerial, you can define RX and TX pins
+ *    in the header "Sim800L.h", by default pins are RX=10 and TX=11.
+ *    Be sure that GND is connected to arduino too. 
+ *    You can also change the RESET_PIN as you prefer.
  *  
  *  ESP
- *      Esta libreria usa SoftwareSerial, se pueden cambiar los pines de RX y TX
- *      en el archivo header, "Sim800l.h", por defecto los pines vienen configurado en
- *      RX=10 TX=11.  
- *      Tambien se puede cambiar el RESET_PIN por otro que prefiera
+ *    Esta libreria usa SoftwareSerial, se pueden cambiar los pines de RX y TX
+ *    en el archivo header, "Sim800L.h", por defecto los pines vienen configurado en
+ *    RX=10 TX=11.  
+ *    Tambien se puede cambiar el RESET_PIN por otro que prefiera
  * 
  *  ITA
- *      Questa libreria utilizza la SoftwareSerial, si possono cambiare i pin di RX e TX
- *      dall' intestazione "Sim800l.h", di default essi sono impostati come RX=10 RX=11
- *      Assicurarsi di aver collegato il dispositivo al pin GND di Arduino.
- *      E' anche possibile cambiare il RESET_PIN.
+ *    Questa libreria utilizza la SoftwareSerial, si possono cambiare i pin di RX e TX
+ *    dall' intestazione "Sim800L.h", di default essi sono impostati come RX=10 RX=11
+ *    Assicurarsi di aver collegato il dispositivo al pin GND di Arduino.
+ *    E' anche possibile cambiare il RESET_PIN.
  *
  *
- *    PINOUT: 
+ *   DEFAULT PINOUT: 
  *        _____________________________
- *       |  ARDUINO UNO >>>   SIM800L  |
+ *       |  ARDUINO UNO >>>   Sim800L  |
  *        -----------------------------
  *            GND      >>>   GND
  *        RX  10       >>>   TX    
@@ -53,25 +49,36 @@
  *    Supported baud rates are 300, 600, 1200, 2400, 4800, 9600, 14400, 19200, 28800, 31250, 38400, 57600, and 115200.
  *
  *
- *  Created on:  April 20, 2016
- *    Author:  Cristian Steib
- *    Reviser: Vittorio Esposito
+ *  Edited on:  December 24, 2016
+ *    Editor:   Vittorio Esposito
+ *    
+ *  Original version by:   Cristian Steib
  *        
  *
 */
 
-#include <Sim800l.h>
-#include <SoftwareSerial.h>   // This is necesary for the library
-Sim800l Sim800l;              // to declare the library
+#include <Sim800L.h>
+#include <SoftwareSerial.h>               
 
+#define RX  10
+#define TX  11
+
+Sim800L GSM(RX, TX);
+
+/*
+ * In alternative:
+ * Sim800L GSM;                       // Use default pinout
+ * Sim800L GSM(RX, TX, RESET);        
+ * Sim800L GSM(RX, TX, RESET, LED);
+ */
 
 void setup(){
-  Serial.begin(9600); // only for debug the results . 
-  Sim800l.begin();    // initializate the library. 
+  Serial.begin(9600);
+  GSM.begin(4800);    
 
   String pin = "1234";
   
-  if (Sim800l.setPIN(pin)) Serial.println("Pin set");
+  if (GSM.setPIN(pin)) Serial.println("Pin set");
   else Serial.println("Pin NOT set");
   
 }
