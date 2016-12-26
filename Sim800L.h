@@ -1,4 +1,4 @@
-/* 
+/*
  *  This library was written by Vittorio Esposito
  *    https://github.com/VittorioEsposito
  *
@@ -7,15 +7,15 @@
  *  ENG
  *  	This library uses SoftwareSerial, you can define RX and TX pins
  *  	in the header "Sim800L.h", by default pins are RX=10 and TX=11.
- *  	Be sure that GND is connected to arduino too. 
+ *  	Be sure that GND is connected to arduino too.
  *  	You can also change the RESET_PIN as you prefer.
- *  
+ *
  *	ESP
  *  	Esta libreria usa SoftwareSerial, se pueden cambiar los pines de RX y TX
  *  	en el archivo header, "Sim800L.h", por defecto los pines vienen configurado en
- *  	RX=10 TX=11.  
+ *  	RX=10 TX=11.
  *  	Tambien se puede cambiar el RESET_PIN por otro que prefiera
- * 
+ *
  *	ITA
  *		Questa libreria utilizza la SoftwareSerial, si possono cambiare i pin di RX e TX
  *  	dall' intestazione "Sim800L.h", di default essi sono impostati come RX=10 RX=11
@@ -23,15 +23,15 @@
  *		E' anche possibile cambiare il RESET_PIN.
  *
  *
- *   DEFAULT PINOUT: 
+ *   DEFAULT PINOUT:
  *        _____________________________
  *       |  ARDUINO UNO >>>   Sim800L  |
  *        -----------------------------
  *            GND      >>>   GND
- *        RX  10       >>>   TX    
+ *        RX  10       >>>   TX
  *        TX  11       >>>   RX
- *       RESET 2       >>>   RST 
- *                 
+ *       RESET 2       >>>   RST
+ *
  *   POWER SOURCE 4.2V >>> VCC
  *
  *
@@ -44,16 +44,16 @@
  *		3. Not all pins on the Leonardo and Micro support change interrupts, so only the following can be used for RX: 8, 9, 10, 11, 14 (MISO), 15 (SCK), 16 (MOSI).
  *		4. On Arduino or Genuino 101 the current maximum RX speed is 57600bps
  *		5. On Arduino or Genuino 101 RX doesn't work on Pin 13
- *	
+ *
  *		BAUD RATE
  *		Supported baud rates are 300, 600, 1200, 2400, 4800, 9600, 14400, 19200, 28800, 31250, 38400, 57600, and 115200.
  *
  *
  *	Edited on:  December 24, 2016
  *    Editor:   Vittorio Esposito
- *    
+ *
  *  Original version by:   Cristian Steib
- *        
+ *
  *
 */
 
@@ -72,7 +72,7 @@
 
 #define BUFFER_RESERVE_MEMORY	255
 #define DEFAULT_BAUD_RATE		9600
-#define TIME_OUT_READ_SERIAL	10000
+#define TIME_OUT_READ_SERIAL	5000
 
 
 class Sim800L : public SoftwareSerial
@@ -86,21 +86,22 @@ private:
     uint8_t _functionalityMode;
 
     String _readSerial();
+    String _readSerial(uint32_t timeout);
 
 
 public:
 
-	uint8_t	RX_PIN;
-	uint8_t TX_PIN;
-	uint8_t RESET_PIN;
-	uint8_t LED_PIN;
-	bool	LED_FLAG;
-	
-	Sim800L(void);
-	Sim800L(uint8_t rx, uint8_t tx);
-	Sim800L(uint8_t rx, uint8_t tx, uint8_t rst);
-	Sim800L(uint8_t rx, uint8_t tx, uint8_t rst, uint8_t led);
-	
+    uint8_t	RX_PIN;
+    uint8_t TX_PIN;
+    uint8_t RESET_PIN;
+    uint8_t LED_PIN;
+    bool	LED_FLAG;
+
+    Sim800L(void);
+    Sim800L(uint8_t rx, uint8_t tx);
+    Sim800L(uint8_t rx, uint8_t tx, uint8_t rst);
+    Sim800L(uint8_t rx, uint8_t tx, uint8_t rst, uint8_t led);
+
     void begin();					//Default baud 9600
     void begin(uint32_t baud);
     void reset();
@@ -122,19 +123,19 @@ public:
     uint8_t getCallStatus();
 
     bool sendSms(char* number,char* text);
-    String readSms(uint8_t index); 			
-    String getNumberSms(uint8_t index); 	
-    bool delAllSms();     					
+    String readSms(uint8_t index);
+    String getNumberSms(uint8_t index);
+    bool delAllSms();
 
 
     String signalQuality();
     void setPhoneFunctionality();
     void activateBearerProfile();
     void deactivateBearerProfile();
-    
+
     void RTCtime(int *day,int *month, int *year,int *hour,int *minute, int *second);
     String dateNet();
-    bool updateRtc(int utc); 
+    bool updateRtc(int utc);
 
 };
 
