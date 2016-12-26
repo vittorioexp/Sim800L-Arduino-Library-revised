@@ -29,10 +29,10 @@ begin()|None|Initialize the library
 begin(number)|None|Initialize the library
 reset()|None|Reset the module,and wait to Sms Ready.
 setSleepMode(bool)|true or false|enable or disable sleep mode
-getSleepMode()|true or false|return sleep mode
+getSleepMode()|true or false|return sleep mode status
 setFunctionalityMode(number)|true or false|set functionality mode
-getFunctionalityMode()|true or false|return functionality mode
-setPIN(String)|true or false|
+getFunctionalityMode()|true or false|return functionality mode status
+setPIN(String)|true or false|enable user to set a pin code
 getProductInfo()|String|return product identification information
 getOperatorsList()|String|return the list of operators
 getOperator()|String|return the currently selected operator
