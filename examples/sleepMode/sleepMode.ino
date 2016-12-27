@@ -79,7 +79,7 @@ void setup(){
   // Sleep
   if (!GSM.setSleepMode(true)) Serial.println("ERROR");
 
-  if (GSM.getSleepMode(false)) Serial.println("Sleep mode is enabled");
+  if (GSM.getSleepMode()) Serial.println("Sleep mode is enabled");
   else Serial.println("Sleep mode is NOT enabled");
   
   delay(5000);
