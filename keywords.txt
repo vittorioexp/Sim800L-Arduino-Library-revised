@@ -45,6 +45,11 @@ getProductInfo	KEYWORD2
 getOperatorsList	KEYWORD2
 getOperator	KEYWORD2
 
+calculateLocation	KEYWORD2
+getLocationCode	KEYWORD2
+getLongitude	KEYWORD2
+getLatitude	KEYWORD2
+
 answerCall	KEYWORD2
 callNumber	KEYWORD2
 hangoffCall	KEYWORD2

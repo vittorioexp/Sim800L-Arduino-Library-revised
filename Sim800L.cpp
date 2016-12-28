@@ -251,6 +251,73 @@ String Sim800L::getOperator()
 }
 
 
+bool Sim800L::calculateLocation() 
+{
+	/*
+		Type: 1  To get longitude and latitude
+		Cid = 1  Bearer profile identifier refer to AT+SAPBR
+	*/
+		
+	uint8_t type = 1;
+	uint8_t cid = 1;
+	
+
+	this->print("AT+CIPGSMLOC=");
+	this->print(type);
+	this->print(",");
+	this->print(cid);
+	this->print("\r");
+	
+	
+	String data = _readSerial();
+	
+	if (data.indexOf("ER")!=(-1)) return false;
+	
+	uint8_t indexOne;
+	uint8_t indexTwo;
+	
+	indexOne = data.indexOf(":") + 1;
+	indexTwo = data.indexOf(",");
+
+	_locationCode = data.substring(indexOne , indexTwo);
+
+	indexOne = data.indexOf(",") + 1;
+	indexTwo = data.indexOf("," , indexOne);
+
+	_longitude = data.substring(indexOne , indexTwo);
+
+	indexOne = data.indexOf(",", indexTwo) + 1;
+	indexTwo = data.indexOf("," , indexOne);
+
+	_latitude = data.substring(indexOne , indexTwo);
+	
+	return true;
+		
+}
+
+String Sim800L::getLocationCode() {
+	return _locationCode;
+	/*
+     Location Code:
+     0      Success
+     404    Not Found
+     408    Request Time-out
+     601    Network Error
+     602    No Memory
+     603    DNS Error
+     604    Stack Busy
+     65535  Other Error
+  */
+}
+
+String Sim800L::getLongitude() {
+	return _longitude;
+}
+
+String Sim800L::getLatitude() {
+	return _latitude;
+}
+
 
 //
 //PUBLIC METHODS

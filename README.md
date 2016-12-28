@@ -23,6 +23,8 @@ Arduino Uno  |   Sim800L   |    Notes
 GND | GND | 
 
 
+* If it returns true there is an error
+
 ## Methods and functions
 
 Name|Return|Notes
@@ -30,22 +32,26 @@ Name|Return|Notes
 begin()|None|Initialize the library
 begin(number)|None|Initialize the library with user's baud rate
 reset()|None|Reset the module, and wait to Sms Ready.
-setSleepMode(bool)|true or false|enable or disable sleep mode
-getSleepMode()|true or false|return sleep mode status
-setFunctionalityMode(number)|true or false|set functionality mode
-getFunctionalityMode()|true or false|return functionality mode status
-setPIN(String)|true or false|enable user to set a pin code
+setSleepMode(bool)|true or false|enable or disable sleep mode *
+getSleepMode()|true or false|return sleep mode status *
+setFunctionalityMode(number)|true or false|set functionality mode *
+getFunctionalityMode()|true or false|return functionality mode status *
+setPIN(String)|true or false|enable user to set a pin code *
 getProductInfo()|String|return product identification information
 getOperatorsList()|String|return the list of operators
 getOperator()|String|return the currently selected operator
-sendSms(number,text)|true or false|both parameters must be Strings.
+calculateLocation()|true or false|calculate gsm position *
+getLocationCode()|String|return the location code
+getLongitude()|String|return longitude
+getLatitude()|String|return latitude
+sendSms(number,text)|true or false|both parameters must be Strings. *
 readSms(index)|String|index is the position of the sms in the prefered memory storage
 getNumberSms(index)|String|returns the number of the sms.
-delAllSms()|true or false|Delete all sms
+delAllSms()|true or false|Delete all sms *
 signalQuality()|String|return info about signal quality
-answerCall()|true or false|
+answerCall()|true or false| *
 callNumber(number)|None|
-hangoffCall()|true or false|
+hangoffCall()|true or false| *
 getCallStatus()|uint8_t|Return the call status, 0=ready,2=Unknown(),3=Ringing,4=Call in progress
 setPhoneFunctionality()|None|Set at to full functionality 
 activateBearerProfile()|None|

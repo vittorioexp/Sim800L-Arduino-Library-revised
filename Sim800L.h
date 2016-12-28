@@ -84,6 +84,9 @@ private:
     String _buffer;
     bool _sleepMode;
     uint8_t _functionalityMode;
+	String _locationCode;
+	String _longitude;
+	String _latitude;
 
     String _readSerial();
     String _readSerial(uint32_t timeout);
@@ -116,6 +119,11 @@ public:
 
     String getOperatorsList();
     String getOperator();
+	
+	bool calculateLocation();
+	String getLocationCode();
+	String getLongitude();
+	String getLatitude();
 
     bool answerCall();
     void callNumber(char* number);
