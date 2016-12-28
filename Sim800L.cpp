@@ -269,7 +269,7 @@ bool Sim800L::calculateLocation()
 	this->print("\r");
 	
 	
-	String data = _readSerial();
+	String data = _readSerial(20000);
 	
 	if (data.indexOf("ER")!=(-1)) return false;
 	
