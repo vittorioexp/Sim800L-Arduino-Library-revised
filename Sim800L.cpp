@@ -106,7 +106,7 @@ void Sim800L::begin()
     pinMode(RESET_PIN, OUTPUT);
 
     _baud = DEFAULT_BAUD_RATE;			// Default baud rate 9600
-    this->begin(_baud);
+    this->SoftwareSerial::begin(_baud);
 
     _sleepMode = 0;
     _functionalityMode = 1;
@@ -122,7 +122,7 @@ void Sim800L::begin(uint32_t baud)
     pinMode(RESET_PIN, OUTPUT);
 
     _baud = baud;
-    this->begin(_baud);
+    this->SoftwareSerial::begin(_baud);
 
     _sleepMode = 0;
     _functionalityMode = 1;
