@@ -85,7 +85,7 @@ void setup() {
   Serial.print("Longitude: ");
   Serial.println(GSM.getLongitude());
 
-  Serial.print("Longitude: ");
+  Serial.print("Latitude: ");
   Serial.println(GSM.getLatitude());
 
   /*
