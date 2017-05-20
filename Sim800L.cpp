@@ -260,14 +260,17 @@ bool Sim800L::calculateLocation()
 
     uint8_t type = 1;
     uint8_t cid = 1;
-
-
+	
+	String tmp = "AT+CIPGSMLOC=" + String(type) + "," + String(cid) + "\r\n";
+	this->SoftwareSerial::print(tmp);
+	
+	/*
     this->SoftwareSerial::print("AT+CIPGSMLOC=");
     this->SoftwareSerial::print(type);
     this->SoftwareSerial::print(",");
     this->SoftwareSerial::print(cid);
     this->SoftwareSerial::print("\r");
-
+	*/
 
     String data = _readSerial(20000);
 
