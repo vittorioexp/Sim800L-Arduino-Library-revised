@@ -426,7 +426,7 @@ void  Sim800L::callNumber(char* number)
 {
     this->SoftwareSerial::print (F("ATD"));
     this->SoftwareSerial::print (number);
-    this->SoftwareSerial::print (F("\r\n"));
+    this->SoftwareSerial::print (F(";\r\n"));
 }
 
 
