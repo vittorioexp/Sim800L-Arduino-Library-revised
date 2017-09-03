@@ -19,17 +19,17 @@ Sim800L	KEYWORD1
 
 # Methods for calling (KEYWORD2)
 #######################################
-answerCall KEYWORD2
-callNumber KEYWORD2
-hangoffCall KEYWORD2
+answerCall	KEYWORD2
+callNumber	KEYWORD2
+hangoffCall	KEYWORD2
 
 
 # Methods for Sms (KEYWORD2)
 #######################################
 sendSms	KEYWORD2
-readSms KEYWORD2 
-delAllSms KEYWORD2
-getNumberSms KEYWORD2
+readSms	KEYWORD2 
+delAllSms	KEYWORD2
+getNumberSms	KEYWORD2
 
 # Methods for Module (KEYWORD2)
 #######################################
