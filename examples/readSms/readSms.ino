@@ -71,20 +71,25 @@ Sim800L GSM(RX, TX);
  * Sim800L GSM(RX, TX, RESET);        
  * Sim800L GSM(RX, TX, RESET, LED);
  */
-
-String text;     				// to save the text of the sms
-uint8_t index;   				// to indicate the message to read.
-
+ 
+/*
+ * NOTICE:
+ * FOR THIS TO WORK YOU HAVE TO INCREASE RX BUFFER SIZE
+ * Open SoftwareSerial.h and change _SS_MAX_RX_BUFF to 256
+ *
+ */
 
 void setup() {
-  Serial.begin(9600); 
-  GSM.begin(4800); 
-  index = 1; 
-  text = GSM.readSms(index);
-  Serial.println(text);
-
+  Serial.begin(9600);
+  GSM.begin(4800);
+  GSM.delAllSms(); // this is optional
+  GSM.prepareForSmsReceive();
 }
 
 void loop() {
-  //do nothing
+  byte index = GSM.checkForSMS();
+  if(index != 0)
+  {
+  	Serial.println(gsm.readSms(index));
+  }
 }
