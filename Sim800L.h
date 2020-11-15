@@ -74,7 +74,6 @@
 #define DEFAULT_BAUD_RATE		9600
 #define TIME_OUT_READ_SERIAL	5000
 
-
 class Sim800L : public SoftwareSerial
 {
 private:
@@ -90,7 +89,6 @@ private:
 
     String _readSerial();
     String _readSerial(uint32_t timeout);
-
 
 public:
 
@@ -130,6 +128,8 @@ public:
     bool hangoffCall();
     uint8_t getCallStatus();
 
+	const uint8_t checkForSMS();
+	void prepareForSmsReceive();
     bool sendSms(char* number,char* text);
     String readSms(uint8_t index);
     String getNumberSms(uint8_t index);

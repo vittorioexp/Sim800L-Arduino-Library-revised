@@ -493,6 +493,30 @@ bool Sim800L::sendSms(char* number,char* text)
 }
 
 
+void Sim800L::prepareForSmsReceive()
+{
+	// Configure SMS in text mode
+	this->SoftwareSerial::print (F("AT+CMGF=1\r"));
+	this->SoftwareSerial::print(F("AT+CNMI=2,1,0,0,0\r"));
+}
+
+const uint8_t Sim800L::checkForSMS()
+{
+	 _buffer = _readSerial(100);
+	 if(_buffer.length() == 0)
+	 {
+	 	return 0;
+	 }
+	 //Serial.println(_buffer);
+	 // +CMTI: "SM",1
+	 if(_buffer.indexOf("CMTI") == -1)
+	 {
+	 	return 0;
+	 }
+	 return _buffer.substring(_buffer.indexOf(',')+1).toInt();
+}
+
+
 String Sim800L::getNumberSms(uint8_t index)
 {
     _buffer=readSms(index);
@@ -513,25 +537,28 @@ String Sim800L::getNumberSms(uint8_t index)
 
 String Sim800L::readSms(uint8_t index)
 {
-
     // Can take up to 5 seconds
 
-    this->SoftwareSerial::print (F("AT+CMGF=1\r"));
-
-    if (( _readSerial(5000).indexOf("ER")) ==-1)
+    if (( _readSerial(5000).indexOf("ER")) != -1)
     {
-        this->SoftwareSerial::print (F("AT+CMGR="));
-        this->SoftwareSerial::print (index);
-        this->SoftwareSerial::print ("\r");
-        _buffer=_readSerial();
-        if (_buffer.indexOf("CMGR:")!=-1)
-        {
-            return _buffer;
-        }
-        else return "";
+    	return "";
     }
-    else
-        return "";
+
+    this->SoftwareSerial::print (F("AT+CMGR="));
+    this->SoftwareSerial::print (index);
+    this->SoftwareSerial::print ("\r");
+    _buffer=_readSerial();
+    //Serial.println(_buffer);
+    if (_buffer.indexOf("CMGR") == -1)
+    {
+    	return "";
+    }
+
+	_buffer=_readSerial();
+	//Serial.println(_buffer);
+	byte first = _buffer.indexOf('\n', 2) + 1;
+	byte second = _buffer.indexOf('\n', first);
+    return _buffer.substring(first, second);
 }
 
 
