@@ -90,6 +90,6 @@ void loop() {
   byte index = GSM.checkForSMS();
   if(index != 0)
   {
-  	Serial.println(gsm.readSms(index));
+  	Serial.println(GSM.readSms(index));
   }
 }
