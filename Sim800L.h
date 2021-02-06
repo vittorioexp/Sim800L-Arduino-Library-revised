@@ -129,7 +129,7 @@ public:
     uint8_t getCallStatus();
 
 	const uint8_t checkForSMS();
-	void prepareForSmsReceive();
+	bool prepareForSmsReceive();
     bool sendSms(char* number,char* text);
     String readSms(uint8_t index);
     String getNumberSms(uint8_t index);
@@ -140,6 +140,7 @@ public:
     void setPhoneFunctionality();
     void activateBearerProfile();
     void deactivateBearerProfile();
+    bool setMode();
 
     void RTCtime(int *day,int *month, int *year,int *hour,int *minute, int *second);
     String dateNet();

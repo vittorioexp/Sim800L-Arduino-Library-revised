@@ -201,7 +201,6 @@ uint8_t Sim800L::getFunctionalityMode()
     return _functionalityMode;
 }
 
-
 bool Sim800L::setPIN(String pin)
 {
     String command;
@@ -480,6 +479,7 @@ bool Sim800L::sendSms(char* number,char* text)
     _buffer=_readSerial();
     this->SoftwareSerial::print((char)26);
     _buffer=_readSerial(60000);
+    // Serial.println(_buffer);
     //expect CMGS:xxx   , where xxx is a number,for the sending sms.
     if ((_buffer.indexOf("ER")) != -1) {
         return true;
@@ -493,11 +493,24 @@ bool Sim800L::sendSms(char* number,char* text)
 }
 
 
-void Sim800L::prepareForSmsReceive()
+bool Sim800L::prepareForSmsReceive()
 {
 	// Configure SMS in text mode
-	this->SoftwareSerial::print (F("AT+CMGF=1\r"));
+	this->SoftwareSerial::print(F("AT+CMGF=1\r"));
+    _buffer=_readSerial();
+    //Serial.print(_buffer);
+    if((_buffer.indexOf("OK")) == -1)
+    {
+        return false;
+    }
 	this->SoftwareSerial::print(F("AT+CNMI=2,1,0,0,0\r"));
+    _buffer=_readSerial();
+    //Serial.print(_buffer);
+    if((_buffer.indexOf("OK")) == -1)
+    {
+        return false;
+    }
+    return true;
 }
 
 const uint8_t Sim800L::checkForSMS()
@@ -507,7 +520,8 @@ const uint8_t Sim800L::checkForSMS()
 	 {
 	 	return 0;
 	 }
-	 //Serial.println(_buffer);
+     _buffer += _readSerial(1000);
+	 // Serial.println(_buffer);
 	 // +CMTI: "SM",1
 	 if(_buffer.indexOf("CMTI") == -1)
 	 {
@@ -539,7 +553,7 @@ String Sim800L::readSms(uint8_t index)
 {
     // Can take up to 5 seconds
 
-    if (( _readSerial(5000).indexOf("ER")) != -1)
+    if(( _readSerial(5000).indexOf("ER")) != -1)
     {
     	return "";
     }
@@ -554,8 +568,7 @@ String Sim800L::readSms(uint8_t index)
     	return "";
     }
 
-	_buffer=_readSerial();
-	//Serial.println(_buffer);
+	_buffer = _readSerial(10000);
 	byte first = _buffer.indexOf('\n', 2) + 1;
 	byte second = _buffer.indexOf('\n', first);
     return _buffer.substring(first, second);

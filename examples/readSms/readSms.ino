@@ -83,7 +83,10 @@ void setup() {
   Serial.begin(9600);
   GSM.begin(4800);
   GSM.delAllSms(); // this is optional
-  GSM.prepareForSmsReceive();
+  while(!GSM.prepareForSmsReceive())
+  {
+    delay(1000);
+  }
 }
 
 void loop() {
