@@ -2,7 +2,7 @@ Sim800L Arduino Library revised
 =====
 
 
-The purpose of this library is to simplify and speed up the use of the SIM800L module for Arduino.à
+The purpose of this library is to simplify and speed up the use of the SIM800L module for Arduino.
 
 
 
@@ -17,7 +17,7 @@ Connections
 ---
 
 
-Arduino Pins |   Sim800L Pins   |    Notes  
+Arduino      |   Sim800L        |    Notes  
 -------------|------------------|------------
 +5v| (3.8v)~(4.4v)!| Power supply input
 10 RX_PIN | TX |  
