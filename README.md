@@ -4,7 +4,7 @@ Sim800L Arduino Library revised
 
 The purpose of this library is to simplify and speed up the use of the SIM800L module for Arduino.
 
-**I'm currently looking for more collaborators - feel free to submit your pull request to grow this open-source project! **
+**I'm currently looking for more collaborators - feel free to submit your pull request to grow this open-source project!
 
 
 
