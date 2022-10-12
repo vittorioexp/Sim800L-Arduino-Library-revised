@@ -1,11 +1,17 @@
-## Sim800L Arduino Library revised
-This is a high school project.
-The purpose of this library is to use the sim800L module in the simplest and most transparent way.
-
-Original version by:   [Cristian Steib] (https://github.com/cristiansteib)
+Sim800L Arduino Library revised
+=====
 
 
-## connections & pinouts (DEFAULT)
+The purpose of this library is to simplify and speed up the use of the SIM800L module for Arduino.
+
+**I'm currently looking for more collaborators - feel free to submit your pull request to grow this open-source project! **
+
+
+
+Connections
+---
+
+
 Arduino Uno  |   Sim800L   |    Notes  
 -------------|-------------|------------
 +5v| (3.8v)~(4.4v)!| Power supply input
@@ -17,7 +23,9 @@ GND | GND |
 
 * If it returns true there is an error
 
-## Methods and functions
+Functions
+---
+
 
 Name|Return|Notes
 :-------|:-------:|:-----------------------------------------------:|
@@ -52,3 +60,11 @@ RTCtime(int *day,int *month, int *year,int *hour,int *minute, int *second)|None|
 dateNet()|String|Return date time GSM
 updateRtc(utc)|bool|Return if the rtc was update with date time GSM. 
 ____________________________________________________________________________________
+
+
+
+Credits
+---
+
+
+Original version of the library by:   [Cristian Steib] (https://github.com/cristiansteib)
