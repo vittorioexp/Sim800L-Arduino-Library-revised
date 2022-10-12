@@ -35,26 +35,26 @@ Name|Return|Notes
 begin()|None|Initialize the library
 begin(number)|None|Initialize the library with user's baud rate
 reset()|None|Reset the module, and wait to Sms Ready.
-setSleepMode(bool)|bool|enable or disable sleep mode *
-getSleepMode()|bool|return sleep mode status *
-setFunctionalityMode(number)|bool|set functionality mode *
-getFunctionalityMode()|bool|return functionality mode status *
-setPIN(String)|bool|enable user to set a pin code *
+setSleepMode(bool)|bool|enable or disable sleep mode. If it returns true, there is an error.
+getSleepMode()|bool|return sleep mode status. If it returns true, there is an error.
+setFunctionalityMode(number)|bool|set functionality mode. If it returns true, there is an error.
+getFunctionalityMode()|bool|return functionality mode status. If it returns true, there is an error.
+setPIN(String)|bool|enable user to set a pin code. If it returns true, there is an error.
 getProductInfo()|String|return product identification information
 getOperatorsList()|String|return the list of operators
 getOperator()|String|return the currently selected operator
-calculateLocation()|bool|calculate gsm position *
+calculateLocation()|bool|calculate gsm position. If it returns true, there is an error.
 getLocationCode()|String|return the location code
 getLongitude()|String|return longitude
 getLatitude()|String|return latitude
-sendSms(number,text)|bool|both parameters must be Strings. *
+sendSms(number,text)|bool|both parameters must be Strings. If it returns true, there is an error.
 readSms(index)|String|index is the position of the sms in the prefered memory storage
 getNumberSms(index)|String|returns the number of the sms.
-delAllSms()|bool|Delete all sms *
+delAllSms()|bool|Delete all sms. If it returns true, there is an error.
 signalQuality()|String|return info about signal quality
-answerCall()|bool| *
+answerCall()|bool| If it returns true, there is an error.
 callNumber(number)|None|
-hangoffCall()|bool| *
+hangoffCall()|bool| If it returns true, there is an error.
 getCallStatus()|uint8_t|Return the call status, 0=ready,2=Unknown(),3=Ringing,4=Call in progress
 setPhoneFunctionality()|None|Set at to full functionality 
 activateBearerProfile()|None|
