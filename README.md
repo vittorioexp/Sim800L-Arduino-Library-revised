@@ -26,8 +26,6 @@ Arduino Pins |   Sim800L Pins   |    Notes
 GND | GND | 
 
 
-* If it returns true there is an error
-
 Functions
 ---
 
