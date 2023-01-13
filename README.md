@@ -1,39 +1,78 @@
 Sim800L Arduino Library revised
 =====
 
-
-The purpose of this library is to simplify and speed up the use of the SIM800L module for Arduino.
-
+The SIM800L Arduino Library is a simple and easy-to-use library for the SIM800L module, allowing for quick and efficient communication with the module using the Arduino platform.
 
 
-Contributions
+Features
 ---
 
-I'm currently looking for more collaborators - feel free to submit your pull request to grow this open-source project!
+* Simplifies the initialization and configuration of the SIM800L module
+* Provides a set of easy-to-use functions for sending and receiving SMS messages
+* Supports making and receiving phone calls
+* Includes example sketches to demonstrate the library's capabilities
 
 
-
-Connections
+Installation
 ---
 
-
-Arduino      |   Sim800L        |    Notes  
--------------|------------------|------------
-+5v| (3.8v)~(4.4v)!| Power supply input
-10 RX_PIN | TX |  
-11 TX_PIN | RX |
-2   RESET_PIN | RST| Reset Pin
-GND | GND | 
+You can install the Sim800L Arduino Library in the Arduino IDE by going to Sketch > Include Library > Manage Libraries, searching for "Sim800L" and clicking on the "install" button.
+Alternatively, you can download the library files from the GitHub repository and install it by going to Sketch > Include Library > Add .ZIP Library and selecting the downloaded files.
 
 
-Functions
+Usage
 ---
 
+To use the library, simply include the library in your sketch and create an instance of the SIM800L class. The library provides a set of functions for sending and receiving SMS messages, making and receiving phone calls, and more.
+
+For example, to send an SMS message, you can use the following code:
+```
+#include <Sim800L.h>
+
+Sim800L Sim800L(10, 11);   // RX_PIN and TX_PIN
+
+void setup(){
+	Sim800L.begin(4800); 			
+	Sim800L.sendSms("+1234567890","Hello world!");
+}
+
+void loop(){
+	//do nothing
+}
+```
+
+
+
+Collaboration
+---
+
+This is an open-source project and I'm currently looking for more collaborators to help grow and improve it. If you're interested, feel free to submit your pull request to the GitHub repository.
+
+
+Connecting the SIM800L to the Arduino
+---
+
+Before you can use the Sim800L Arduino Library, you need to physically connect the SIM800L module to your Arduino board.
+
+1. Connect the SIM800L's GND pin to the GND pin on the Arduino board
+2. Connect the SIM800L's VCC pin to the 3.3V pin on the Arduino board
+3. Connect the SIM800L's RX pin to the TX pin on the Arduino board (default is pin 11)
+4. Connect the SIM800L's TX pin to the RX pin on the Arduino board (default is pin 10)
+5. Connect the SIM800L's RST pin to the RESET pin on the Arduino board (default is pin 2)
+
+It is important to note that the SIM800L module requires a stable power supply of at least 2A, it is strongly recommended to use an external power supply to power the SIM800L module.
+The SIM800L's VCC pin should be connected to the 3.3V pin on the Arduino board. Connecting it to the 5V pin may damage the module as it operates on 3.3V voltage level. It is important to ensure the voltage level is compatible with the module's specifications to avoid any damage.
+
+
+Function List
+---
+
+Here is a list of functions that can be called on an instance of the SIM800L class:
 
 Name|Return|Notes
 :-------|:-------:|:-----------------------------------------------:|
-begin()|None|Initialize the library
-begin(number)|None|Initialize the library with user's baud rate
+begin()|None|Initialize the module with a defalt baud rate
+begin(number)|None|Initialize the module with a custom baud rate
 reset()|None|Reset the module, and wait to Sms Ready.
 setSleepMode(bool)|bool|enable or disable sleep mode. If it returns true, there is an error.
 getSleepMode()|bool|return sleep mode status. If it returns true, there is an error.
@@ -66,8 +105,13 @@ ________________________________________________________________________________
 
 
 
-Credits
+License
 ---
 
+The Sim800L Arduino Library revised by Vittorio Esposito is open-source software and is licensed under the MIT License.
+
+
+Credits
+---
 
 Original version of the library by:   [Cristian Steib] (https://github.com/cristiansteib)
