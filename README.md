@@ -108,7 +108,7 @@ ________________________________________________________________________________
 License
 ---
 
-The Sim800L Arduino Library revised by Vittorio Esposito is open-source software and is licensed under the MIT License.
+The Sim800L Arduino Library revised by Vittorio Esposito is open-source software and is licensed under the GPL-3.0 license.
 
 
 Credits
